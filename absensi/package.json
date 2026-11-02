@@ -1,0 +1,14 @@
+{
+  "name": "absensi",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n BACKEND,FACE -c blue,green \"npm run dev:backend\" \"npm run dev:face\"",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:face": "cd face-detector && python -m uvicorn main:app --reload --port 5000",
+    "start": "concurrently -n BACKEND,FACE \"npm --prefix backend run start\" \"cd face-detector && python -m uvicorn main:app --port 5000\"",
+    "install:all": "npm install && npm --prefix backend install && pip install -r face-detector/requirements.txt"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
