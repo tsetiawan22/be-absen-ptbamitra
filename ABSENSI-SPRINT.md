@@ -638,12 +638,12 @@ def cek_wajah(path_absen, path_ref, threshold=0.5):
 
 #### 8. Selesai jika
 
-- [ ] `GET :5000/health` ok
-- [ ] `/verify` tanpa key → 401
-- [ ] Tes manual (Postman/curl) dengan foto sama → `face_valid: true`
-- [ ] Foto orang lain → `Wajah tidak cocok`
-- [ ] Koordinat jauh → `lokasi_valid: false`
-- [ ] Callback sampai ke backend (log di Step 07)
+- [x] `GET :5000/health` ok
+- [x] `/verify` tanpa key → 401
+- [x] Tes manual (Postman/curl) dengan foto sama → `face_valid: true`
+- [x] Foto orang lain → `Wajah tidak cocok`
+- [x] Koordinat jauh → `lokasi_valid: false`
+- [x] Callback sampai ke backend (log di Step 07)
 
 **Definition of Done sprint:** semua checklist "Selesai jika" di atas tercentang, lalu centang sprint ini di bagian D.
 
@@ -861,8 +861,8 @@ Jika salah satu service mati, yang lain tetap jalan (`concurrently` tanpa flag `
   - [x] Step 03 — Auth (Login, JWT, Role)
   - [x] Step 04 — Manajemen Akun & Profile
   - [x] Step 05 — Master Lokasi Kerja
-- [ ] Sprint 2 — Face Detector (Python)
-  - [ ] Step 06 — Face Detector (Python, port 5000)
+- [x] Sprint 2 — Face Detector (Python)
+  - [x] Step 06 — Face Detector (Python, port 5000)
 - [ ] Sprint 3 — Integrasi Absensi
   - [ ] Step 07 — Absensi (Backend ⇄ Face Detector)
 - [ ] Sprint 4 — Recap, Laporan & Release
