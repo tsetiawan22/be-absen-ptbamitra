@@ -12,6 +12,7 @@
 | Database | **PostgreSQL** (lib `pg`, tanpa ORM) |
 | Face Detector | **Python** + FastAPI + `face_recognition`, port **5000** |
 | Dev runner | `nest start --watch` / `ts-node` (backend) + `uvicorn --reload` (python), dijalankan bareng via `concurrently` |
+| Container / Deploy | **Docker** & **Docker Compose** (lihat `DOCKER.md`) |
 
 ### 2. Gaya Pemrograman (WAJIB)
 
@@ -66,10 +67,13 @@ Poin penting:
 ### 5. Struktur Folder Akhir
 
 ```
+DOCKER.md                         # Panduan deployment & cheat sheet Docker
 absensi/
-├── package.json              # root: script dev menjalankan 2 server
+├── package.json                  # root: script dev menjalankan 2 server
+├── docker-compose.yml            # Orkestrasi 3 service (db, backend, face-detector)
 ├── .env.example
 ├── backend/
+│   ├── Dockerfile
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── src/
@@ -85,6 +89,7 @@ absensi/
 │       │   └── laporan/ (laporan.module.ts, laporan.controller.ts, laporan.service.ts)
 │       └── utils/response.ts
 ├── face-detector/
+│   ├── Dockerfile
 │   ├── requirements.txt
 │   ├── main.py
 │   ├── face.py
@@ -799,7 +804,14 @@ npm --prefix backend run migrate
 npm run dev                 # backend :3000 + face detector :5000 hidup bersamaan
 ```
 
-Produksi:
+Produksi (Docker - Direkomendasikan untuk Server):
+```bash
+cd absensi
+docker compose up -d --build
+# Migrasi database & seed admin_sdm otomatis saat backend start. Detail lengkap lihat DOCKER.md.
+```
+
+Produksi (Host/Manual):
 ```bash
 npm --prefix backend run build
 npm run start
@@ -869,6 +881,9 @@ Jika salah satu service mati, yang lain tetap jalan (`concurrently` tanpa flag `
   - [ ] Step 08 — Recap Absensi & Laporan
   - [ ] Step 09 — Run Bareng & Checklist Test
 ```
+
+> **Catatan Tambahan (Containerization):**
+> Konfigurasi Docker sudah siap pakai untuk server (`DOCKER.md`, `absensi/docker-compose.yml`, `absensi/backend/Dockerfile`, `absensi/face-detector/Dockerfile`). Auto-migrasi dan shared volume `./uploads` sudah aktif.
 
 ### Aturan Resume (jika sesi AI putus)
 
